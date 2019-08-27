@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing slider component <SlideItem /> renders <slideItem /> component without crashing 1`] = `null`;

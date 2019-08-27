@@ -1,24 +1,15 @@
 import React from 'react';
-import { waitForElement, render } from '@testing-library/react';
-import NextComponent from './next';
-import nextArrow from '../arrow.svg';
+import renderer from 'react-test-renderer';
+import Next from './next';
 
-const suite = '<Next> Component';
+const suite = 'Test <Next arrow component <Next />';
 
-describe( suite, () => {
-    function buildComponent(props={}) {
-        const wrapped = render(<NextComponent {...props} />);
-        return wrapped;
-    }
-    decribe("user should see", () => {
-        it ("should have className when rendered", async() => {
-            const component = buildComponent();
+describe(suite, () => {
+    test('renders without breaking', () => {
+        const component = renderer.create(
+            <Next />
+        ).toJSON();
 
-            await waitForElement(() => {
-                const found = component.container.firtChild;
-                expect(found).toHaveAttribute('calssName');
-                return found;
-            });
-        });
-    });
+        expect(component).toMatchSnapshot();
+    })
 })

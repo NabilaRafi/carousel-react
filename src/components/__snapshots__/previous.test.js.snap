@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Previous component <Previous /> renders previous component without breaking 1`] = `
+<div
+  className="prev-arrow"
+>
+  <img
+    alt="previous"
+    src="arrow.svg"
+  />
+</div>
+`;
