@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import SlideItem from './slide';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { loadImage } from '../action';
+import SlideItem from './slider';
 import Next from './next';
 import Previous from './previous';
 
@@ -15,7 +18,9 @@ class CarouselContainer extends Component {
         this.onClickPrev = this.onClickPrev.bind(this);
     }
 
-
+    componentDidMount() {
+        this.props.loadImage();
+    }
 
     onClickNext() {
         const { imageArray } = this.props;
@@ -47,6 +52,7 @@ class CarouselContainer extends Component {
     }
 
     render() {
+        const { imageArray } = this.props;
         return (
             <div className="carousel-container">
                 <div className="carousel-wrapper"
@@ -55,7 +61,10 @@ class CarouselContainer extends Component {
                         transition: 'transform ease-out 0.45s',
                     }}
                 >
-                        <SlideItem />
+                    { imageArray && imageArray.map((image, i ) => (
+                        <SlideItem key={i} image={image} id='active'/>
+                    ))
+                    }
                 </div>
                 <Previous clickPrev={this.onClickPrev}/>
                 <Next  clickNext={this.onClickNext}/>
@@ -66,5 +75,20 @@ class CarouselContainer extends Component {
     }
 }
 
+const mapStateToProps = (state) => ({
+    data: state.data.hits,
+    imageArray: state.imageArray,
+})
 
-export default CarouselContainer;
+
+CarouselContainer.propTypes = {
+    loadImage: PropTypes.func,
+    data: PropTypes.array,
+}
+
+const CarouselComponent = connect(
+    mapStateToProps, 
+    {loadImage}
+)(CarouselContainer);
+
+export default CarouselComponent;

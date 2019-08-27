@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import previousArrow from './arrow.svg';
+import previousArrow from '../arrow.svg';
 
 const Previous = (props) => {
     return <div className="prev-arrow" onClick={props.clickPrev}>
